@@ -2,63 +2,109 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>DFLauncher | Profil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DF-X | Profil Paneli</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://unpkg.com/skinview3d@3.0.0/dist/bundle.js"></script>
     <style>
-        body { background-color: #050505; color: #ededed; font-family: sans-serif; }
-        .df-yellow { color: #f59e0b; }
-        .df-bg-yellow { background-color: #f59e0b; }
-        .glass-panel { background: rgba(15, 15, 15, 0.7); border: 1px solid rgba(245, 158, 11, 0.1); backdrop-filter: blur(20px); }
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap');
+        body { background-color: #000; color: #fff; font-family: 'Space Grotesk', sans-serif; }
+        .grid-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: linear-gradient(rgba(245, 158, 11, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 158, 11, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .glass-panel { background: rgba(10, 10, 10, 0.8); border: 1px solid rgba(245, 158, 11, 0.1); backdrop-filter: blur(15px); }
+        .stat-badge { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); color: #f59e0b; }
     </style>
 </head>
 <body class="min-h-screen">
-    <nav class="p-6 flex justify-between items-center max-w-6xl mx-auto">
-        <a href="index.html" class="text-2xl font-black tracking-tighter"><span class="df-yellow">DF</span>LAUNCHER</a>
-        <div id="userNav" class="flex items-center gap-4">
+    <div class="grid-bg"></div>
+
+    <nav class="max-w-7xl mx-auto px-8 py-8 flex justify-between items-center relative z-20">
+        <a href="index.html" class="text-2xl font-black italic text-amber-500">DF-X</a>
+        <div id="userDisplay" class="flex items-center gap-4">
             </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-12 gap-8">
-        <div class="md:col-span-5 glass-panel rounded-[40px] p-8 flex items-center justify-center h-[500px]">
-            <canvas id="skin_container"></canvas>
+    <main class="max-w-7xl mx-auto px-8 py-10 grid lg:grid-cols-12 gap-8 relative z-20">
+        
+        <div class="lg:col-span-5 glass-panel rounded-[40px] p-8 flex flex-col items-center justify-center min-h-[550px] relative overflow-hidden">
+            <div class="absolute top-6 left-6 stat-badge px-4 py-1 rounded-full text-[10px] font-black tracking-widest">3D ÖNİZLEME</div>
+            <canvas id="skin_container" class="cursor-grab active:cursor-grabbing"></canvas>
+            <div class="mt-6 flex gap-3">
+                <button onclick="changeAnim('walk')" class="px-4 py-2 bg-white/5 rounded-lg text-[10px] font-bold hover:bg-white/10 transition">YÜRÜ</button>
+                <button onclick="changeAnim('run')" class="px-4 py-2 bg-white/5 rounded-lg text-[10px] font-bold hover:bg-white/10 transition">KOŞ</button>
+                <button onclick="changeAnim('idle')" class="px-4 py-2 bg-white/5 rounded-lg text-[10px] font-bold hover:bg-white/10 transition">DUR</button>
+            </div>
         </div>
-        <div class="md:col-span-7 space-y-6">
+
+        <div class="lg:col-span-7 space-y-8">
             <div class="glass-panel rounded-[32px] p-8">
-                <h2 class="text-2xl font-black mb-6 uppercase tracking-tight">Skin <span class="df-yellow">Yükle</span></h2>
-                <label class="border-2 border-dashed border-white/10 rounded-3xl p-12 flex flex-col items-center justify-center hover:border-yellow-500/40 cursor-pointer bg-white/[0.02]">
-                    <i class="fa-solid fa-file-image text-5xl text-gray-600 mb-4"></i>
-                    <span class="text-gray-400 font-bold text-center">Dosyayı Buraya Bırak veya Seç</span>
+                <h3 class="text-xl font-bold mb-6 tracking-tighter uppercase text-amber-500 underline decoration-amber-500/20 underline-offset-8">Görünüm Ayarları</h3>
+                <label class="w-full h-40 border-2 border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:bg-amber-500/5 hover:border-amber-500/40 transition-all group">
+                    <i class="fa-solid fa-cloud-arrow-up text-3xl text-gray-600 mb-2 group-hover:text-amber-500 transition"></i>
+                    <span class="text-gray-500 font-bold text-sm">Yeni Skin (PNG) Yükle</span>
                     <input type="file" id="skinInput" class="hidden" accept=".png">
                 </label>
-                <button id="saveBtn" class="w-full df-bg-yellow text-black font-black py-5 rounded-2xl mt-6 shadow-xl">DEĞİŞİKLİKLERİ UYGULA</button>
+            </div>
+
+            <div class="glass-panel rounded-[32px] p-8">
+                <h3 class="text-xl font-bold mb-6 tracking-tighter uppercase text-amber-500">Performans Motoru</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
+                        <span class="text-[10px] block text-gray-500 font-bold mb-2 uppercase">RAM Temizleyici</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-green-500">AKTİF</span>
+                            <i class="fa-solid fa-microchip opacity-20"></i>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
+                        <span class="text-[10px] block text-gray-500 font-bold mb-2 uppercase">GPU Hızlandırma</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-green-500">AKTİF</span>
+                            <i class="fa-solid fa-gauge-high opacity-20"></i>
+                        </div>
+                    </div>
+                </div>
+                <button class="w-full bg-amber-500 text-black font-black py-4 rounded-xl mt-6 uppercase tracking-tighter hover:shadow-[0_0_20px_rgba(245,158,11,0.3)] transition">
+                    Ayarları Kaydet ve Başlat
+                </button>
             </div>
         </div>
     </main>
 
     <script>
-        // Giriş Kontrolü
+        // Giriş ve Kullanıcı İşlemleri
         const currentUser = localStorage.getItem('df_user');
-        const userNav = document.getElementById('userNav');
+        const userDisplay = document.getElementById('userDisplay');
 
         if (currentUser) {
-            userNav.innerHTML = `<span class="text-xs font-bold text-gray-500 uppercase">Hoş geldin, <span class="text-white">${currentUser}</span></span>
-                                 <button onclick="logout()" class="text-xs text-red-500 font-bold">Çıkış</button>`;
+            userDisplay.innerHTML = `
+                <div class="text-right hidden sm:block leading-none">
+                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Bağlı Oyuncu</p>
+                    <p class="text-sm font-black text-white uppercase">${currentUser}</p>
+                </div>
+                <button onclick="logout()" class="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 hover:bg-red-500 hover:text-white transition">
+                    <i class="fa-solid fa-power-off"></i>
+                </button>
+            `;
         } else {
-            userNav.innerHTML = `<a href="auth.html" class="df-bg-yellow text-black px-4 py-2 rounded-lg font-bold text-xs">GİRİŞ YAP</a>`;
+            window.location.href = 'auth.html';
         }
 
         function logout() {
             localStorage.removeItem('df_user');
-            window.location.reload();
+            window.location.href = 'index.html';
         }
 
-        // 3D Engine
+        // 3D Skin Engine
+        let skinViewer;
         window.onload = function() {
-            const skinViewer = new skinview3d.SkinViewer({
+            skinViewer = new skinview3d.SkinViewer({
                 canvas: document.getElementById("skin_container"),
-                width: 300, height: 400,
+                width: 300, height: 450,
                 skin: "https://mineskin.org/assets/img/steve.png"
             });
             skinViewer.animations.add(skinview3d.WalkingAnimation);
@@ -73,6 +119,12 @@
                 }
             };
         };
+
+        function changeAnim(type) {
+            skinViewer.animations.reset();
+            if(type === 'walk') skinViewer.animations.add(skinview3d.WalkingAnimation);
+            if(type === 'run') skinViewer.animations.add(skinview3d.RunningAnimation);
+        }
     </script>
 </body>
 </html>
