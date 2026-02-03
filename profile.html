@@ -2,100 +2,76 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DFLauncher | Profil & Skin</title>
+    <title>DFLauncher | Profil</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://bundle.run/skinview3d@3.0.0"></script>
+    <script src="https://unpkg.com/skinview3d@3.0.0/dist/bundle.js"></script>
     <style>
-        body { background-color: #050505; color: #ededed; font-family: 'Inter', sans-serif; }
+        body { background-color: #050505; color: #ededed; font-family: sans-serif; }
         .df-yellow { color: #f59e0b; }
         .df-bg-yellow { background-color: #f59e0b; }
         .glass-panel { background: rgba(15, 15, 15, 0.7); border: 1px solid rgba(245, 158, 11, 0.1); backdrop-filter: blur(20px); }
-        .skin-canvas { cursor: grab; }
-        .skin-canvas:active { cursor: grabbing; }
     </style>
 </head>
 <body class="min-h-screen">
-
     <nav class="p-6 flex justify-between items-center max-w-6xl mx-auto">
-        <div class="text-2xl font-black tracking-tighter"><span class="df-yellow">DF</span>LAUNCHER</div>
-        <div class="flex items-center gap-4">
-            <span class="text-sm font-bold text-gray-500 uppercase">Hoş geldin, <span class="text-white">El-Farad</span></span>
-            <div class="w-10 h-10 rounded-full bg-yellow-500/20 border border-yellow-500/40"></div>
-        </div>
+        <a href="index.html" class="text-2xl font-black tracking-tighter"><span class="df-yellow">DF</span>LAUNCHER</a>
+        <div id="userNav" class="flex items-center gap-4">
+            </div>
     </nav>
 
     <main class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-12 gap-8">
-        
-        <div class="md:col-span-5 glass-panel rounded-[40px] p-8 flex flex-col items-center justify-center relative overflow-hidden h-[600px]">
-            <canvas id="skin_container" class="skin-canvas"></canvas>
-            <div class="mt-6 text-center z-10">
-                <p class="text-gray-500 text-sm font-medium italic">Karakteri döndürmek için sürükle</p>
-            </div>
+        <div class="md:col-span-5 glass-panel rounded-[40px] p-8 flex items-center justify-center h-[500px]">
+            <canvas id="skin_container"></canvas>
         </div>
-
         <div class="md:col-span-7 space-y-6">
-            
             <div class="glass-panel rounded-[32px] p-8">
-                <h2 class="text-2xl font-black mb-6 uppercase tracking-tight">Karakterini <span class="df-yellow">Güncelle</span></h2>
-                
-                <div class="space-y-8">
-                    <label for="skinInput" class="border-2 border-dashed border-white/10 rounded-3xl p-12 flex flex-col items-center justify-center hover:border-yellow-500/40 transition-all cursor-pointer group bg-white/[0.02]">
-                        <i class="fa-solid fa-file-image text-5xl text-gray-600 group-hover:text-yellow-500 transition mb-4"></i>
-                        <span class="text-gray-400 font-bold">Yeni Skin Dosyası Seç (.png)</span>
-                        <span class="text-gray-600 text-xs mt-2 uppercase tracking-widest font-bold">64x64 veya 64x32</span>
-                        <input type="file" id="skinInput" class="hidden" accept=".png">
-                    </label>
-
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white/5 p-5 rounded-2xl border border-white/5">
-                            <span class="text-[10px] text-gray-500 uppercase font-black tracking-widest">Karakter Tipi</span>
-                            <p class="font-bold text-lg">Steve (Klasik)</p>
-                        </div>
-                        <div class="bg-white/5 p-5 rounded-2xl border border-white/5">
-                            <span class="text-[10px] text-gray-500 uppercase font-black tracking-widest">Sistem Durumu</span>
-                            <p class="font-bold text-lg text-green-500">API Bağlı</p>
-                        </div>
-                    </div>
-
-                    <button class="w-full df-bg-yellow text-black font-black py-5 rounded-2xl hover:scale-[1.02] transition-transform shadow-xl shadow-yellow-500/10 uppercase tracking-tighter text-lg">
-                        Değişiklikleri Uygula
-                    </button>
-                </div>
-            </div>
-
-            <div class="bg-yellow-500/5 border border-yellow-500/10 rounded-2xl p-6">
-                <p class="text-sm text-yellow-500/80 leading-relaxed">
-                    <i class="fa-solid fa-circle-info mr-2"></i>
-                    Yüklediğin skinler sadece <b>DFLauncher</b> kullanıcıları tarafından görülebilir. Orijinal Minecraft sunucularında görünmesi için Microsoft hesabınla giriş yapmalısın.
-                </p>
+                <h2 class="text-2xl font-black mb-6 uppercase tracking-tight">Skin <span class="df-yellow">Yükle</span></h2>
+                <label class="border-2 border-dashed border-white/10 rounded-3xl p-12 flex flex-col items-center justify-center hover:border-yellow-500/40 cursor-pointer bg-white/[0.02]">
+                    <i class="fa-solid fa-file-image text-5xl text-gray-600 mb-4"></i>
+                    <span class="text-gray-400 font-bold text-center">Dosyayı Buraya Bırak veya Seç</span>
+                    <input type="file" id="skinInput" class="hidden" accept=".png">
+                </label>
+                <button id="saveBtn" class="w-full df-bg-yellow text-black font-black py-5 rounded-2xl mt-6 shadow-xl">DEĞİŞİKLİKLERİ UYGULA</button>
             </div>
         </div>
     </main>
 
     <script>
-        // 3D Skin Render Motorunu Başlat
-        const skinViewer = new skinview3d.SkinViewer({
-            canvas: document.getElementById("skin_container"),
-            width: 300,
-            height: 400,
-            skin: "https://minotar.net/skin/char" // Varsayılan skin
-        });
+        // Giriş Kontrolü
+        const currentUser = localStorage.getItem('df_user');
+        const userNav = document.getElementById('userNav');
 
-        // Animasyonlar
-        skinViewer.animations.add(skinview3d.WalkingAnimation);
-        skinViewer.autoRotate = true;
-        skinViewer.autoRotateSpeed = 0.5;
+        if (currentUser) {
+            userNav.innerHTML = `<span class="text-xs font-bold text-gray-500 uppercase">Hoş geldin, <span class="text-white">${currentUser}</span></span>
+                                 <button onclick="logout()" class="text-xs text-red-500 font-bold">Çıkış</button>`;
+        } else {
+            userNav.innerHTML = `<a href="auth.html" class="df-bg-yellow text-black px-4 py-2 rounded-lg font-bold text-xs">GİRİŞ YAP</a>`;
+        }
 
-        // Dosya seçildiğinde önizlemeyi güncelle
-        document.getElementById('skinInput').onchange = function(evt) {
-            const file = evt.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = () => skinViewer.loadSkin(reader.result);
-                reader.readAsDataURL(file);
-            }
+        function logout() {
+            localStorage.removeItem('df_user');
+            window.location.reload();
+        }
+
+        // 3D Engine
+        window.onload = function() {
+            const skinViewer = new skinview3d.SkinViewer({
+                canvas: document.getElementById("skin_container"),
+                width: 300, height: 400,
+                skin: "https://mineskin.org/assets/img/steve.png"
+            });
+            skinViewer.animations.add(skinview3d.WalkingAnimation);
+            skinViewer.autoRotate = true;
+
+            document.getElementById('skinInput').onchange = function(evt) {
+                const file = evt.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = () => skinViewer.loadSkin(reader.result);
+                    reader.readAsDataURL(file);
+                }
+            };
         };
     </script>
 </body>
