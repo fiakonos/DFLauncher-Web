@@ -2,53 +2,34 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DFLauncher | Giriş Yap & Kayıt Ol</title>
+    <title>DFLauncher | Giriş</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { background-color: #050505; color: #ededed; font-family: 'Inter', sans-serif; }
+        body { background-color: #050505; color: #ededed; font-family: sans-serif; }
         .df-yellow { color: #f59e0b; }
         .df-bg-yellow { background-color: #f59e0b; }
-        .glass-card { 
-            background: rgba(15, 15, 15, 0.8); 
-            border: 1px solid rgba(245, 158, 11, 0.1);
-            backdrop-filter: blur(20px);
-        }
         input { background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255,255,255,0.08) !important; color: white !important; }
-        input:focus { border-color: #f59e0b !important; outline: none; }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-6">
-
-    <div class="max-w-md w-full glass-card rounded-[32px] p-10 shadow-2xl">
+    <div class="max-w-md w-full bg-[#0f0f0f] border border-white/5 rounded-[32px] p-10 shadow-2xl">
         <div class="text-center mb-10">
-            <div class="text-3xl font-black tracking-tighter mb-2">
-                <span class="df-yellow">DF</span>LAUNCHER
-            </div>
-            <p class="text-gray-500 text-sm uppercase tracking-widest font-bold">Hesabına Eriş</p>
+            <div class="text-3xl font-black tracking-tighter df-yellow">DF<span class="text-white">LAUNCHER</span></div>
+            <p class="text-gray-500 text-xs mt-2 uppercase font-bold tracking-widest">Hesabına Eriş</p>
         </div>
-
-        <form class="space-y-6">
-            <div>
-                <label class="block text-xs font-bold text-gray-500 uppercase mb-2 ml-1">Kullanıcı Adı</label>
-                <input type="text" placeholder="Oyundaki adın" class="w-full px-5 py-4 rounded-2xl transition">
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold text-gray-500 uppercase mb-2 ml-1">Şifre</label>
-                <input type="password" placeholder="••••••••" class="w-full px-5 py-4 rounded-2xl transition">
-            </div>
-
-            <button type="submit" class="w-full df-bg-yellow text-black font-black py-5 rounded-2xl hover:brightness-110 transition shadow-lg shadow-yellow-500/10">
-                GİRİŞ YAP
-            </button>
+        <form id="loginForm" class="space-y-6">
+            <input type="text" id="usernameInput" placeholder="Kullanıcı Adın" class="w-full px-5 py-4 rounded-2xl" required>
+            <input type="password" placeholder="Şifre" class="w-full px-5 py-4 rounded-2xl" required>
+            <button type="submit" class="w-full df-bg-yellow text-black font-black py-5 rounded-2xl hover:brightness-110 shadow-lg">GİRİŞ YAP</button>
         </form>
-
-        <div class="mt-10 text-center text-sm text-gray-500">
-            Hesabın yok mu? <a href="#" class="df-yellow font-bold hover:underline">Kayıt Ol</a>
-        </div>
     </div>
-
+    <script>
+        document.getElementById('loginForm').onsubmit = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('usernameInput').value;
+            localStorage.setItem('df_user', name); // İsmi kaydet
+            window.location.href = 'profile.html'; // Yönlendir
+        };
+    </script>
 </body>
 </html>
