@@ -2,33 +2,56 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>DFLauncher | Giriş</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DF-X | Giriş Yap</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { background-color: #050505; color: #ededed; font-family: sans-serif; }
-        .df-yellow { color: #f59e0b; }
-        .df-bg-yellow { background-color: #f59e0b; }
-        input { background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255,255,255,0.08) !important; color: white !important; }
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap');
+        body { background-color: #000; color: #fff; font-family: 'Space Grotesk', sans-serif; overflow: hidden; }
+        .grid-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: linear-gradient(rgba(245, 158, 11, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 158, 11, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .glass-box { background: rgba(10, 10, 10, 0.9); border: 1px solid rgba(245, 158, 11, 0.1); backdrop-filter: blur(15px); }
+        input { background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(245, 158, 11, 0.1) !important; color: white !important; }
+        input:focus { border-color: #f59e0b !important; box-shadow: 0 0 15px rgba(245, 158, 11, 0.1); outline: none; }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-6">
-    <div class="max-w-md w-full bg-[#0f0f0f] border border-white/5 rounded-[32px] p-10 shadow-2xl">
+<body class="min-h-screen flex flex-col items-center justify-center p-6">
+    <div class="grid-bg"></div>
+
+    <a href="index.html" class="mb-10 text-3xl font-black italic text-amber-500 tracking-tighter">DF-X</a>
+
+    <div class="max-w-md w-full glass-box p-10 rounded-[40px] shadow-2xl relative">
         <div class="text-center mb-10">
-            <div class="text-3xl font-black tracking-tighter df-yellow">DF<span class="text-white">LAUNCHER</span></div>
-            <p class="text-gray-500 text-xs mt-2 uppercase font-bold tracking-widest">Hesabına Eriş</p>
+            <h2 class="text-3xl font-bold tracking-tighter uppercase">KONTROL <span class="text-amber-500">MERKEZİ</span></h2>
+            <p class="text-gray-500 text-xs mt-2 font-bold tracking-[0.3em] uppercase">Erişim Sağlanıyor...</p>
         </div>
+
         <form id="loginForm" class="space-y-6">
-            <input type="text" id="usernameInput" placeholder="Kullanıcı Adın" class="w-full px-5 py-4 rounded-2xl" required>
-            <input type="password" placeholder="Şifre" class="w-full px-5 py-4 rounded-2xl" required>
-            <button type="submit" class="w-full df-bg-yellow text-black font-black py-5 rounded-2xl hover:brightness-110 shadow-lg">GİRİŞ YAP</button>
+            <div class="space-y-2">
+                <label class="text-[10px] font-black text-amber-500 tracking-widest ml-2 uppercase">Kullanıcı Adı</label>
+                <input type="text" id="usernameInput" placeholder="Oyuncu adını gir..." class="w-full px-6 py-4 rounded-2xl font-bold" required>
+            </div>
+            <div class="space-y-2">
+                <label class="text-[10px] font-black text-gray-500 tracking-widest ml-2 uppercase">Şifre</label>
+                <input type="password" placeholder="••••••••" class="w-full px-6 py-4 rounded-2xl font-bold" required>
+            </div>
+            
+            <button type="submit" class="w-full bg-amber-500 text-black font-black py-5 rounded-2xl hover:shadow-[0_0_25px_rgba(245,158,11,0.4)] transition-all uppercase tracking-tighter text-lg mt-4">
+                SİSTEME GİRİŞ YAP
+            </button>
         </form>
     </div>
+
     <script>
         document.getElementById('loginForm').onsubmit = function(e) {
             e.preventDefault();
             const name = document.getElementById('usernameInput').value;
-            localStorage.setItem('df_user', name); // İsmi kaydet
-            window.location.href = 'profile.html'; // Yönlendir
+            localStorage.setItem('df_user', name);
+            window.location.href = 'profile.html';
         };
     </script>
 </body>
