@@ -2,94 +2,34 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DFLauncher | Resmi Web Sitesi</title>
+    <title>DFLauncher | Ana Sayfa</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Tam siyah yerine çok koyu bir gri tonu gözü daha az yorar */
-        body { background-color: #0a0a0a; color: #ededed; font-family: 'Inter', sans-serif; }
-        
-        /* Sarıyı biraz daha turuncuya yakın, 'Amber' tonunda tutuyoruz */
+        body { background-color: #050505; color: #ededed; font-family: sans-serif; }
         .df-yellow { color: #f59e0b; }
         .df-bg-yellow { background-color: #f59e0b; }
-        .df-border-yellow { border-color: #d97706; }
-        
-        /* Kartlar için hafif bir belirginlik */
-        .glass-panel { 
-            background: rgba(20, 20, 20, 0.6); 
-            border: 1px solid rgba(245, 158, 11, 0.1);
-            backdrop-filter: blur(12px);
-        }
-
-        /* Göz alan o beyazlığı kıran yumuşak bir parlama */
-        .glow-soft {
-            box-shadow: 0 0 40px -10px rgba(245, 158, 11, 0.15);
-        }
     </style>
 </head>
 <body class="antialiased">
-
     <nav class="p-6 flex justify-between items-center max-w-7xl mx-auto">
-        <div class="text-3xl font-black tracking-tighter">
-            <span class="df-yellow">DF</span>LAUNCHER
-        </div>
-        <div class="space-x-8 hidden md:flex items-center">
-            <a href="#" class="text-gray-400 hover:text-white transition">Ana Sayfa</a>
-            <a href="#" class="text-gray-400 hover:text-white transition">Skinler</a>
-            <a href="#" class="text-gray-400 hover:text-white transition">Wiki</a>
-            <button class="text-gray-400 hover:text-white">Giriş</button>
-            <button class="df-bg-yellow text-black px-8 py-2.5 rounded-xl font-bold hover:brightness-90 transition">Kayıt Ol</button>
+        <div class="text-3xl font-black tracking-tighter"><span class="df-yellow">DF</span>LAUNCHER</div>
+        <div class="space-x-8 items-center flex">
+            <a href="index.html" class="hover:text-yellow-500 transition">Ana Sayfa</a>
+            <a href="profile.html" class="hover:text-yellow-500 transition">Panelim</a>
+            <a href="auth.html" class="df-bg-yellow text-black px-6 py-2 rounded-lg font-bold">Kayıt Ol</a>
         </div>
     </nav>
-
-    <main class="max-w-7xl mx-auto px-6 pt-20 pb-24 grid md:grid-cols-2 gap-20 items-center">
+    <main class="max-w-7xl mx-auto px-6 pt-20 text-center md:text-left grid md:grid-cols-2 gap-10 items-center">
         <div>
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-xs font-bold mb-8">
-                <span class="relative flex h-2 w-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-yellow-500"></span>
-                </span>
-                GÜNCELLEME: v1.21.1 AKTİF
-            </div>
-            
-            <h1 class="text-7xl font-black leading-[0.9] mb-8">
-                Sınırları <br><span class="df-yellow">Kendin</span> Çiz!
-            </h1>
-            
-            <p class="text-gray-500 text-xl mb-12 max-w-md">
-                Launcher'ın karanlık gücünü web sitesinde hisset. Göz yormayan tasarım, maksimum hız.
-            </p>
-
-            <div class="flex gap-4">
-                <button class="df-bg-yellow text-black px-12 py-5 rounded-2xl font-black text-xl flex items-center gap-4 hover:scale-105 transition duration-300 glow-soft">
-                    <i class="fa-solid fa-download"></i> HEMEN İNDİR
-                </button>
-                <button class="bg-white/5 border border-white/10 px-10 py-5 rounded-2xl font-bold text-lg hover:bg-white/10 transition">
-                    Panelim
-                </button>
+            <h1 class="text-7xl font-black mb-6 uppercase leading-none text-white">Sınırları <br><span class="df-yellow">Kendin</span> Çiz!</h1>
+            <p class="text-gray-500 text-xl mb-10">En hızlı Minecraft deneyimi ve sana özel skin sistemi burada.</p>
+            <div class="flex gap-4 justify-center md:justify-start">
+                <button class="df-bg-yellow text-black px-10 py-4 rounded-2xl font-black text-lg shadow-lg">İNDİR</button>
+                <a href="auth.html" class="bg-white/5 border border-white/10 px-10 py-4 rounded-2xl font-bold text-lg hover:bg-white/10 transition">Giriş Yap</a>
             </div>
         </div>
-
-        <div class="relative">
-            <div class="glass-panel w-full h-[580px] rounded-[40px] p-8 flex flex-col items-center justify-between">
-                <div class="w-full flex justify-between items-center text-sm opacity-50">
-                    <span>DF-API: Online</span>
-                    <i class="fa-solid fa-ellipsis"></i>
-                </div>
-
-                <div class="relative group">
-                    <div class="absolute -inset-10 bg-yellow-500/5 blur-3xl rounded-full group-hover:bg-yellow-500/10 transition duration-700"></div>
-                    <i class="fa-solid fa-cube text-[180px] text-yellow-500/20 relative z-10"></i>
-                </div>
-
-                <div class="text-center pb-8">
-                    <h3 class="text-2xl font-bold mb-2">Karakter Yönetimi</h3>
-                    <p class="text-gray-500 text-sm">Skinini sürükle, dünyada tarzını konuştur.</p>
-                </div>
-            </div>
-        </div>
+        <div class="hidden md:block opacity-20"><i class="fa-solid fa-cube text-[300px] text-yellow-500"></i></div>
     </main>
-
 </body>
 </html>
