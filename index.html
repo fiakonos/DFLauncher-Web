@@ -2,34 +2,106 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>DFLauncher | Ana Sayfa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DF-X | Performansın Zirvesi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { background-color: #050505; color: #ededed; font-family: sans-serif; }
-        .df-yellow { color: #f59e0b; }
-        .df-bg-yellow { background-color: #f59e0b; }
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Syncopate:wght@700&display=swap');
+        
+        body { background-color: #000; color: #fff; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+        .amber-glow { text-shadow: 0 0 20px rgba(245, 158, 11, 0.5); }
+        .glass-box { background: rgba(10, 10, 10, 0.9); border: 1px solid rgba(245, 158, 11, 0.1); backdrop-filter: blur(15px); }
+        
+        /* Arka plan animasyonu */
+        .grid-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: linear-gradient(rgba(245, 158, 11, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 158, 11, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(circle at center, black, transparent 90%);
+        }
     </style>
 </head>
-<body class="antialiased">
-    <nav class="p-6 flex justify-between items-center max-w-7xl mx-auto">
-        <div class="text-3xl font-black tracking-tighter"><span class="df-yellow">DF</span>LAUNCHER</div>
-        <div class="space-x-8 items-center flex">
-            <a href="index.html" class="hover:text-yellow-500 transition">Ana Sayfa</a>
-            <a href="profile.html" class="hover:text-yellow-500 transition">Panelim</a>
-            <a href="auth.html" class="df-bg-yellow text-black px-6 py-2 rounded-lg font-bold">Kayıt Ol</a>
+<body>
+    <div class="grid-bg"></div>
+
+    <nav class="max-w-7xl mx-auto px-8 py-8 flex justify-between items-center relative z-20">
+        <div class="text-3xl font-black italic tracking-tighter text-amber-500">DF-X</div>
+        <div class="flex gap-8 items-center font-bold text-xs tracking-widest">
+            <a href="profile.html" class="hover:text-amber-500 transition">PANELİM</a>
+            <a href="auth.html" class="bg-amber-500 text-black px-8 py-3 rounded-full hover:scale-105 transition">GİRİŞ YAP</a>
         </div>
     </nav>
-    <main class="max-w-7xl mx-auto px-6 pt-20 text-center md:text-left grid md:grid-cols-2 gap-10 items-center">
-        <div>
-            <h1 class="text-7xl font-black mb-6 uppercase leading-none text-white">Sınırları <br><span class="df-yellow">Kendin</span> Çiz!</h1>
-            <p class="text-gray-500 text-xl mb-10">En hızlı Minecraft deneyimi ve sana özel skin sistemi burada.</p>
-            <div class="flex gap-4 justify-center md:justify-start">
-                <button class="df-bg-yellow text-black px-10 py-4 rounded-2xl font-black text-lg shadow-lg">İNDİR</button>
-                <a href="auth.html" class="bg-white/5 border border-white/10 px-10 py-4 rounded-2xl font-bold text-lg hover:bg-white/10 transition">Giriş Yap</a>
+
+    <main class="max-w-7xl mx-auto px-8 py-10 relative z-20 text-center">
+        
+        <h1 class="text-7xl md:text-9xl font-extrabold mb-4 tracking-tighter uppercase leading-none">
+            HÜKMET.
+        </h1>
+        <p class="text-amber-500 font-black tracking-[0.5em] mb-12 text-sm uppercase">FPS Kaybına Son, Güce Merhaba.</p>
+
+        <div class="max-w-2xl mx-auto glass-box p-10 rounded-[40px] mb-20 shadow-2xl relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl"></div>
+            
+            <h2 class="text-2xl font-bold mb-4">Maceraya Şimdi Başla</h2>
+            <p class="text-gray-500 text-sm mb-8 leading-relaxed">
+                Kayıt olarak sana özel skin sistemine, düşük ping protokollerine ve donanım bazlı optimizasyonlara anında erişebilirsin.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="auth.html" class="bg-amber-500 text-black font-black px-12 py-5 rounded-2xl text-xl hover:shadow-[0_0_30px_rgba(245,158,11,0.4)] transition-all">
+                    ÜCRETSİZ KAYIT OL
+                </a>
+                <a href="#" class="bg-white/5 border border-white/10 text-white font-bold px-12 py-5 rounded-2xl text-xl hover:bg-white/10 transition">
+                    İNDİR
+                </a>
             </div>
         </div>
-        <div class="hidden md:block opacity-20"><i class="fa-solid fa-cube text-[300px] text-yellow-500"></i></div>
+
+        <div class="max-w-4xl mx-auto glass-box rounded-[32px] p-10 border-amber-500/20">
+            <div class="flex justify-between items-center mb-10">
+                <div class="text-left">
+                    <h3 class="text-amber-500 font-black tracking-widest text-xs mb-1">PERFORMANS TESTLERİ</h3>
+                    <p class="text-gray-400 text-xs">Donanımını seç, farkı gör.</p>
+                </div>
+                <select id="gpuSelect" class="bg-black border border-white/20 px-4 py-2 rounded-lg text-xs font-bold outline-none cursor-pointer focus:border-amber-500">
+                    <option value="low">RTX 2060 / i5-10400F</option>
+                    <option value="mid" selected>RTX 3060 / i5-12400F</option>
+                    <option value="high">RTX 4070 / i7-13700K</option>
+                </select>
+            </div>
+
+            <div class="space-y-8 text-left">
+                <div class="space-y-2">
+                    <div class="flex justify-between text-[10px] font-black text-gray-500 tracking-widest uppercase">SIRADAN LAUNCHER <span id="stdFps">124 FPS</span></div>
+                    <div class="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                        <div id="barStd" class="h-full bg-gray-600 transition-all duration-1000" style="width: 50%"></div>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between text-[10px] font-black text-amber-500 tracking-widest uppercase">DF-X MOTORU OPTİMİZE <span id="optFps" class="text-xl">218 FPS</span></div>
+                    <div class="h-3 bg-amber-500/10 rounded-full overflow-hidden border border-amber-500/20 shadow-[0_0_15px_rgba(245,158,11,0.1)]">
+                        <div id="barOpt" class="h-full bg-amber-500 transition-all duration-1000 shadow-[0_0_10px_#f59e0b]" style="width: 85%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+
+    <script>
+        const veriler = {
+            low: { std: 85, opt: 142, p1: 40, p2: 70 },
+            mid: { std: 124, opt: 218, p1: 50, p2: 85 },
+            high: { std: 240, opt: 385, p1: 60, p2: 95 }
+        };
+
+        document.getElementById('gpuSelect').addEventListener('change', (e) => {
+            const secilen = veriler[e.target.value];
+            document.getElementById('stdFps').innerText = secilen.std + ' FPS';
+            document.getElementById('optFps').innerText = secilen.opt + ' FPS';
+            document.getElementById('barStd').style.width = secilen.p1 + '%';
+            document.getElementById('barOpt').style.width = secilen.p2 + '%';
+        });
+    </script>
 </body>
 </html>
